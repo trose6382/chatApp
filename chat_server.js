@@ -3,7 +3,9 @@ const mime = require('mime-types');
 const Assistant = require('./assistant');
 
 const port = process.env.PORT || 5000;      //if there is a port, it will use that. OR it will default to 5000. Best to give it a default port. 
-let messages = [];
+// let messages = [];
+
+let house = new House()
 
 http.createServer(handleRequest).listen(port);            //takes the port
 console.log('Listening on port:' + port);

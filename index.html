@@ -6,32 +6,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 </head>
 
-<body>
-    <h1>Let's Chat</h1>
+<body onload="startTime()">
+    <div id="background">
+        <img src="background-beverage-breakfast-414645.jpg" id="computer">
+    </div>
+
     <div id="phone-and-keyboard">
-            <img id="iphone" src="iphone7plus.png">
-            <img id="keyboard" src="iphonekeyboard.png">
+        <img id="iphone" src="iphone7plus.png">
+        <img id="signal-icons" src="iphone-signal.png">
+        <img id="battery-icon" src="iphone-batter-charge.png">
+        <img id="keyboard" src="iphonekeyboard.png">
+            <div id="keyboard-keys">
+                <img class='keys' id='a' src="a.png">
+                <img class='keys' id='b' src="b.png">
+                <img class='keys' id='c' src="c.png">
+                <img class='keys' id='d' src="d.png">
+                <img class='keys' id='e' src="e.png">
+                <img class='keys' id='f' src="f.png">
+                <img class='keys' id='g' src="g.png">
+                <img class='keys' id='h' src="h.png">
+                <img class='keys' id='i' src="i.png">
+                <img class='keys' id='j' src="j.png">
+                <img class='keys' id='k' src="k.png">
+                <img class='keys' id='l' src="l.png">
+                <img class='keys' id='m' src="m.png">
+                <img class='keys' id='n' src="n.png">
+                <img class='keys' id='o' src="o.png">
+                <img class='keys' id='p' src="p.png">
+                <img class='keys' id='q' src="q.png">
+                <img class='keys' id='r' src="r.png">
+                <img class='keys' id='s' src="s.png">
+                <img class='keys' id='t' src="t.png">
+                <img class='keys' id='u' src="u.png">
+                <img class='keys' id='v' src="v.png">
+                <img class='keys' id='w' src="w.png">
+                <img class='keys' id='x' src="x.png">
+                <img class='keys' id='y' src="y.png">
+                <img class='keys' id='z' src="z.png">
+                <img class='keys' id='shift' src="shift.png">
+                <img class='keys' id='space' src="space.png">
+                <img class='keys' id='period' src="period.png">
+                <img class='keys' id='backspace' src="backspace.png">
+                <img class='keys' id='numbers' src="numbers.png">
+                <img class='keys' id='emojis' src="emojis.png">
+                <img class='keys' id='return' src="return.png">
+            </div>
     </div>
 
     <div id="chat-input-output">
-    <div id="form-control">
-        <form id="chat-form" action="chat" method="POST">
-            <input id="text-input" type="text" name="body">
-            <input id="submit-button" type="submit">
-        </form>
-    </div>
-
-    <div id="see-all-button">
-        <button id="see-all-messages-button" onClick="window.location.href='../chat'" type="get">See All Messages</button>
-    </div>
-
-    <div id="chat-messages">
-        <div id='chat-log'>
+        <div id="form-control">
+            <form id="chat-form" action="chat" method="POST">
+                <input id="text-input" type="text" name="body">
+                <input id="submit-button" type="submit">
+            </form>
         </div>
-    </div>
+
+        <div id="see-all-button">
+            <button id="see-all-messages-button" onClick="window.location.href='../chat'" type="get">See All Messages</button>
+        </div>
+
+        <div id="pad-div">
+            <img id="pad" src="post-it-note.png">
+        </div>
+
+        <div id="chat-messages">
+            <div id='chat-log'>
+            </div>
+        </div>
+
+        <div id="clock"></div>
     </div>
 
 
@@ -44,30 +92,200 @@
             let message = inputElement.value;
             let params = new URLSearchParams();
             params.append('body', message);
-            
+            document.getElementById('text-input').value=''
+
             fetch('/chat', {
                 method: 'POST',
                 body: params
             })
-            .then((response) => response.json())
-            .then((messages) =>{
-                chatLog.innerHTML = messages.map(message => message.body).join('<br>')
-            })
+                .then((response) => response.json())
+                .then((messages) => {
+                    chatLog.innerHTML = messages.map(message => message.body).join('<br>')
+                })
 
             event.preventDefault();
 
         })
-        
+
         chatForm.addEventListener('click', (event) => {
-            
+
             fetch('/chat', {
                 method: 'GET'
             })
-            .then((response) => response.json())
-            .then((messages) =>{
-                chatGet.innerHTML = messages.map(message => message.body).join('<br>')
-            })
+                .then((response) => response.json())
         })
+        let test
+        let mostRecentMessageAt = test[-1];
+        console.log(mostRecentMessageAt);
+
+
+
+    </script>
+
+    <script>
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            // var s = today.getSeconds();
+            m = checkTime(m);
+            // s = checkTime(s);
+            document.getElementById('clock').innerHTML =
+                h + ":" + m ;
+            var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+    </script>
+
+<script type="text/javascript">
+    document.getElementById('a').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'a';
+    });
+
+        document.getElementById('b').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'b';
+    });
+
+        document.getElementById('c').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'c';
+    });
+
+    document.getElementById('d').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'd';
+    });
+
+        document.getElementById('e').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'e';
+    });
+
+        document.getElementById('f').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'f';
+    });
+
+        document.getElementById('g').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'g';
+    });
+
+        document.getElementById('h').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'h';
+    });
+
+        document.getElementById('i').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'i';
+    });
+    document.getElementById('j').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'j';
+    });
+
+        document.getElementById('k').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'k';
+    });
+
+        document.getElementById('l').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'l';
+    });
+
+        document.getElementById('m').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'm';
+    });
+
+        document.getElementById('n').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'n';
+    });
+
+        document.getElementById('o').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'o';
+    });
+
+        document.getElementById('p').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'p';
+    });
+
+        document.getElementById('q').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'q';
+    });
+
+        document.getElementById('r').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'r';
+    });
+
+        document.getElementById('s').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 's';
+    });
+
+        document.getElementById('t').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 't';
+    });
+
+        document.getElementById('u').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'u';
+    });
+
+        document.getElementById('v').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'v';
+    });
+
+        document.getElementById('w').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'w';
+    });
+
+        document.getElementById('x').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'x';
+    });
+
+        document.getElementById('y').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'y';
+    });
+
+        document.getElementById('z').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += 'z';
+    });
+    
+    document.getElementById('period').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += '.';
+    });
+
+            document.getElementById('space').addEventListener('click', function () {
+        var text = document.getElementById('text-input');
+        text.value += ' ';
+    });
+
+        document.getElementById('backspace').onclick= function(){
+        var who = document.getElementById('text-input');
+        if(who.value) who.value= who.value.slice(0,-1);
+}
+
+        
     </script>
 
 </body>
